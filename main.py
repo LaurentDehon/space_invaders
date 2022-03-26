@@ -145,15 +145,15 @@ class Invader(pygame.sprite.Sprite):
             for i in invaders_group:
                 i.move_direction *= -1
                 i.rect.y += 10
-        if len(invaders_group) == 10:
-            for i in invaders_group:
-                i.move_direction = self.move_direction * 2
-        elif len(invaders_group) == 5:
-            for i in invaders_group:
-                i.move_direction = self.move_direction * 2
-        elif len(invaders_group) == 2:
-            for i in invaders_group:
-                i.move_direction = self.move_direction * 2
+        # if len(invaders_group) == 10:
+        #     for i in invaders_group:
+        #         i.move_direction = self.move_direction * 2
+        # elif len(invaders_group) == 5:
+        #     for i in invaders_group:
+        #         i.move_direction = self.move_direction * 2
+        # elif len(invaders_group) == 2:
+        #     for i in invaders_group:
+        #         i.move_direction = self.move_direction * 2
 
         # update mask
         self.mask = pygame.mask.from_surface(self.image)
