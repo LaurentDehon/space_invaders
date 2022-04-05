@@ -23,7 +23,8 @@ FONT20 = pygame.font.SysFont('Calibri', 20, 'bold')
 FONT30 = pygame.font.SysFont('Calibri', 30, 'bold')
 FONT40 = pygame.font.SysFont('Calibri', 40, 'bold')
 
-BG_IMG = pygame.transform.scale(pygame.image.load(os.path.join('Assets', 'space.png')), (WIDTH, HEIGHT))
+BG_IMG = pygame.transform.scale(pygame.image.load(
+    os.path.join('Assets', 'space.png')), (WIDTH, HEIGHT))
 
 RED = (255, 0, 0)
 GREEN = (0, 255, 0)
@@ -57,7 +58,8 @@ class Player(pygame.sprite.Sprite):
 
     def __init__(self, x, y, health):
         pygame.sprite.Sprite.__init__(self)
-        self.image = pygame.transform.scale(pygame.image.load(os.path.join('Assets', 'spaceship_player.png')), (50, 60))
+        self.image = pygame.transform.scale(pygame.image.load(
+            os.path.join('Assets', 'spaceship_player.png')), (50, 60))
         self.rect = self.image.get_rect()
         self.rect.center = [x, y]
         self.mask = None
@@ -89,7 +91,8 @@ class Player(pygame.sprite.Sprite):
         self.mask = pygame.mask.from_surface(self.image)
 
         # draw health bar
-        pygame.draw.rect(WIN, RED, (self.rect.x, (self.rect.bottom + 10), self.rect.width, 5))
+        pygame.draw.rect(
+            WIN, RED, (self.rect.x, (self.rect.bottom + 10), self.rect.width, 5))
         if self.health_left > 0:
             pygame.draw.rect(WIN, GREEN, (self.rect.x, (self.rect.bottom + 10),
                                           int(self.rect.width * (self.health_left / self.health)), 5))
@@ -105,7 +108,8 @@ class PlayerLaser(pygame.sprite.Sprite):
 
     def __init__(self, x, y):
         pygame.sprite.Sprite.__init__(self)
-        self.image = pygame.transform.scale(pygame.image.load(os.path.join('Assets', 'beam_blue.png')), (15, 30))
+        self.image = pygame.transform.scale(pygame.image.load(
+            os.path.join('Assets', 'beam_blue.png')), (15, 30))
         self.rect = self.image.get_rect()
         self.rect.center = [x, y]
 
@@ -140,7 +144,7 @@ class Invader(pygame.sprite.Sprite):
     def update(self):
         global game_over
         self.rect.x += self.move_direction
-        print(f"{self.rect.x} / {self.move_direction}")
+        #print(f"{self.rect.x} / {self.move_direction}")
         if self.rect.right > WIDTH - 10 or self.rect.left < 10:
             for i in invaders_group:
                 i.move_direction *= -1
@@ -166,7 +170,8 @@ class InvaderLaser(pygame.sprite.Sprite):
 
     def __init__(self, x, y):
         pygame.sprite.Sprite.__init__(self)
-        self.image = pygame.transform.scale(pygame.image.load(os.path.join('Assets', 'beam_red.png')), (15, 30))
+        self.image = pygame.transform.scale(pygame.image.load(
+            os.path.join('Assets', 'beam_red.png')), (15, 30))
         self.rect = self.image.get_rect()
         self.rect.center = [x, y]
 
@@ -303,7 +308,8 @@ def main():
             if now - last_invader_shot > INVADER_FIRE_COOLDOWN and len(invaders_lasers_group) < INVADER_MAX_LASERS \
                     and len(invaders_group) > 0:
                 attacking_invader = random.choice(invaders_group.sprites())
-                invader_laser = InvaderLaser(attacking_invader.rect.centerx, attacking_invader.rect.bottom)
+                invader_laser = InvaderLaser(
+                    attacking_invader.rect.centerx, attacking_invader.rect.bottom)
                 invaders_lasers_group.add(invader_laser)
                 last_invader_shot = now
 
@@ -325,12 +331,14 @@ def main():
             else:
                 if game_over == -1:
                     message = 'GAME OVER'
-                    draw_text(message, FONT40, WHITE, int(WIDTH / 2), int(HEIGHT / 2))
+                    draw_text(message, FONT40, WHITE, int(
+                        WIDTH / 2), int(HEIGHT / 2))
 
         if COUNTDOWN > 0:
             global last_count
             draw_text(message, FONT40, WHITE, int(WIDTH / 2), int(HEIGHT / 2))
-            draw_text(str(COUNTDOWN), FONT40, WHITE, int(WIDTH / 2), int(HEIGHT / 2 + 50))
+            draw_text(str(COUNTDOWN), FONT40, WHITE,
+                      int(WIDTH / 2), int(HEIGHT / 2 + 50))
             count_timer = pygame.time.get_ticks()
             if count_timer - last_count > 1000:
                 COUNTDOWN -= 1
